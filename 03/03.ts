@@ -1,4 +1,5 @@
 import {StudentType} from "../02/02";
+import {CityType, GovernmentBuildingsType, HousesType} from "../02/02_02";
 
 const x = function (a: number, b: number) {
     return a + b;
@@ -36,4 +37,12 @@ export const addSkill3 = function (a: StudentType, b: string) {
 
 export function doesStLiveInMinsk (q: StudentType, w: string) {
     return q.address.city.title === w;
+}
+
+export const addMoneyToBudget = (a: GovernmentBuildingsType, b: number) => {
+   a.budget += b;
+}
+
+export function repirHouse(a: HousesType) {
+    a.repaired = true;
 }
