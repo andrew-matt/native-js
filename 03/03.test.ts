@@ -1,5 +1,5 @@
 import {StudentType} from "../02/02";
-import {addSkill} from "./03";
+import {addSkill, doesStLiveInMinsk, makeInactive} from "./03";
 
 let student: StudentType;
 
@@ -41,4 +41,17 @@ test("new tech skill should be added to student", () => {
     expect(student.technologies.length).toBe(4);
     expect(student.technologies[3].title).toBe("JS");
     expect(student.technologies[3].id).toBeDefined();
+})
+
+test("student should be made inactive", () => {
+    makeInactive(student, false);
+    expect(student.isActive).toBe(false);
+})
+
+test("does student live in Minsk City?", () => {
+    let res1 = doesStLiveInMinsk(student, "Paris")
+    let res2 = doesStLiveInMinsk(student, "Minsk")
+
+    expect(res1).toBe(false);
+    expect(res2).toBe(true);
 })
