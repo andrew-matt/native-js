@@ -1,6 +1,6 @@
 import React from "react";
 import {CityType} from "../02/02_02";
-import {addMoneyToBudget, repirHouse} from "./03";
+import {addMoneyToBudget, greetingMessage, repirHouse, toFireStaff, toHireStaff} from "./03";
 import exp from "constants";
 
 let city: CityType;
@@ -10,7 +10,7 @@ beforeEach(() => {
         title: "New York",
         houses: [
             {
-                buildedAt: 2012,
+                builtAt: 2012,
                 repaired: false,
                 address: {
                     number: 100,
@@ -20,7 +20,7 @@ beforeEach(() => {
                 }
             },
             {
-                buildedAt: 2008,
+                builtAt: 2008,
                 repaired: false,
                 address: {
                     number: 100,
@@ -30,7 +30,7 @@ beforeEach(() => {
                 }
             },
             {
-                buildedAt: 2020,
+                builtAt: 2020,
                 repaired: false,
                 address: {
                     number: 101,
@@ -84,4 +84,21 @@ test("house 1 should be repaired", () => {
 test("house 2 should be repaired", () => {
     repirHouse(city.houses[2])
     expect(city.houses[2].repaired).toBeTruthy();
+})
+
+test("should fire staff", () => {
+    toFireStaff(city.governmentBuildings[0], 20);
+    expect(city.governmentBuildings[0].staffCount).toBe(180);
+})
+
+test("should hire staff", () => {
+    toHireStaff(city.governmentBuildings[1], 50);
+    expect(city.governmentBuildings[1].staffCount).toBe(1050);
+    toFireStaff(city.governmentBuildings[1], 100);
+    expect(city.governmentBuildings[1].staffCount).toBe(950);
+})
+
+test("greeting message should be correct", () => {
+    const message = greetingMessage(city);
+    expect(message).toBe("Hello New York City! I want all of your 1000000 citizens to be happy!");
 })
