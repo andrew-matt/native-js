@@ -1,5 +1,6 @@
 import {StudentType} from "../02/02";
 import {CityType, GovernmentBuildingsType, HousesType} from "../02/02_02";
+import exp from "constants";
 
 const x = function (a: number, b: number) {
     return a + b;
@@ -45,4 +46,17 @@ export const addMoneyToBudget = (a: GovernmentBuildingsType, b: number) => {
 
 export function repirHouse(a: HousesType) {
     a.repaired = true;
+}
+
+export const toFireStaff = function (x: GovernmentBuildingsType, y: number) {
+    x.staffCount -= y;
+}
+
+export const toHireStaff = function (q: GovernmentBuildingsType, w: number) {
+    q.staffCount += w;
+}
+
+export const greetingMessage = function (props: CityType) {
+    /*return "Hello " + props.title + " City! I want all of your " + props.citizensNumber + " citizens to be happy!";*/
+    return `Hello ${props.title} City! I want all of your ${props.citizensNumber} citizens to be happy!`;
 }
