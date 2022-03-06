@@ -4,15 +4,23 @@ function increaseAge (u: UserType) {
     u.age++;
 }
 
+type AddressType = {
+    title: string
+}
+
 type UserType = {
     name: string
     age: number
+    address: AddressType
 }
 
 test('reference type text', () => {
-    var user = {
+    const user = {
         name: 'Andrew',
-        age: 28
+        age: 28,
+        address: {
+            title: 'Minsk'
+        }
     }
 
     increaseAge(user)
@@ -27,14 +35,44 @@ test('reference type text', () => {
 })
 
 test('array test', () => {
-    var users = [
+    const users = [
         {name: 'Andrew', age: 28},
         {name: 'Andrew', age: 28},
     ]
 
-    var admins = users
+    const admins = users
 
     admins.push({name: 'Bandyugan', age: 10})
 
     expect(users[2]).toEqual({name: 'Bandyugan', age: 10})
+})
+
+test('value type test', () => {
+    const usersCount = 100
+
+    let adminsCount = usersCount
+
+    adminsCount++
+
+    expect(adminsCount).toBe(101)
+})
+
+test('4', () => {
+    let user: UserType = {
+        name: 'Dimych',
+        age: 32,
+        address: {
+            title: 'Minsk'
+        }
+    }
+
+    let user2: UserType = {
+        name: 'Natasha',
+        age: 30,
+        address: user.address
+    }
+
+    user2.address.title = 'Kanary'
+
+    expect(user.address.title).toBe('Kanary')
 })
