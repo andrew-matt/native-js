@@ -66,13 +66,38 @@ test('4', () => {
         }
     }
 
+    let addr = user.address
+
     let user2: UserType = {
         name: 'Natasha',
         age: 30,
-        address: user.address
+        address: addr
     }
+
 
     user2.address.title = 'Kanary'
 
-    expect(user.address.title).toBe('Kanary')
+    user.address.title = 'Minsk City'
+
+    expect(user.address.title).toBe('Minsk City')
+
+    const users = [user, user2, {name: 'Misha', age: 4, address: addr}]
+
+    const admins = [user, user2]
+
+    admins[0].name = 'Dmitry'
+
+    expect(user.name).toBe('Dmitry')
+})
+
+test('sort test', () => {
+    const letters = ['c', 'd', 'a', 'e', 'z']
+
+    passportist(letters)
+
+    expect(letters).toEqual(['c', 'd', 'a', 'e', 'z'])
+
+    function passportist (letters: any) {
+      [...letters].sort();
+    }
 })
