@@ -24,5 +24,17 @@ test('reference type text', () => {
     superman.age = 1000
 
     expect(user.age).toBe(1000)
+})
 
+test('array test', () => {
+    var users = [
+        {name: 'Andrew', age: 28},
+        {name: 'Andrew', age: 28},
+    ]
+
+    var admins = users
+
+    admins.push({name: 'Bandyugan', age: 10})
+
+    expect(users[2]).toEqual({name: 'Bandyugan', age: 10})
 })
