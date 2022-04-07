@@ -1,15 +1,4 @@
-import {UserType} from "./10_01";
-import {Simulate} from "react-dom/test-utils";
-
-function hairdresser(u: UserType, power: number) {
-    const copy = {
-        ...u
-    }
-
-    copy.hair = copy.hair / power
-
-    return copy
-}
+import {getHaircut, moveUser, UserType, UserWithLaptopType} from "./10_01";
 
 test('reference type test', () => {
     let user: UserType = {
@@ -20,9 +9,30 @@ test('reference type test', () => {
         }
     }
 
-    const awesomeUser = hairdresser(user, 2)
+    const awesomeUser = getHaircut(user, 2)
 
     expect(awesomeUser.hair).toBe(16)
     expect(user.hair).toBe(32)
 
+})
+
+
+test('change address', () => {
+    let user: UserWithLaptopType = {
+        name: 'Johnny',
+        hair: 32,
+        address: {
+            title: 'Minsk'
+        },
+        laptop: {
+            title: 'ASUS'
+        }
+    }
+
+    const movedUser = moveUser(user, 'Moscow')
+
+    expect(user).not.toBe(movedUser)
+    expect(user.address).not.toBe(movedUser.address)
+    expect(user.laptop).toBe(movedUser.laptop)
+    expect(movedUser.address.title).toBe('Moscow')
 })
