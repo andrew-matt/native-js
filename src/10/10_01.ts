@@ -52,9 +52,9 @@ export function moveUserToAnotherHouse(u: UserWithLaptopType & UserWithBooksType
     }
 }
 
-export function addNewBooksToUser(u: UserWithLaptopType & UserWithBooksType, oldBook: string, newBook: string) {
+export function removeBook(u: UserWithLaptopType & UserWithBooksType, bookToRemove: string) {
     return {
         ...u,
-        books: u.books.map(b => b === oldBook ? newBook : b)
+        books: u.books.filter(b => b !== bookToRemove)
     }
 }
