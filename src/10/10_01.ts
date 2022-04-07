@@ -27,3 +27,12 @@ export function moveUser(u: UserWithLaptopType, newAddress: string) {
         }
     }
 }
+
+export function upgradeUserLaptop(u: UserWithLaptopType, newLaptop: string) {
+    return {
+        ...u,
+        laptop: {
+            title: newLaptop
+        }
+    }
+}
