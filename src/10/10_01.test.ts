@@ -1,11 +1,20 @@
-import {getHaircut, moveUser, upgradeUserLaptop, UserType, UserWithLaptopType} from "./10_01";
+import {
+    getHaircut,
+    moveUser,
+    moveUserToAnotherHouse,
+    upgradeUserLaptop,
+    UserType,
+    UserWithBooksType,
+    UserWithLaptopType
+} from "./10_01";
 
 test('reference type test', () => {
     let user: UserType = {
         name: 'Johnny',
         hair: 32,
         address: {
-            title: 'Minsk'
+            city: 'Minsk',
+            house: 12
         }
     }
 
@@ -21,10 +30,11 @@ test('change address', () => {
         name: 'Johnny',
         hair: 32,
         address: {
-            title: 'Minsk'
+            city: 'Minsk',
+            house: 12
         },
         laptop: {
-            title: 'ASUS'
+            title: 'ASUS',
         }
     }
 
@@ -33,7 +43,7 @@ test('change address', () => {
     expect(user).not.toBe(movedUser)
     expect(user.address).not.toBe(movedUser.address)
     expect(user.laptop).toBe(movedUser.laptop)
-    expect(movedUser.address.title).toBe('Moscow')
+    expect(movedUser.address.city).toBe('Moscow')
 })
 
 test('upgrade laptop to macbook', () => {
@@ -41,10 +51,11 @@ test('upgrade laptop to macbook', () => {
         name: 'Johnny',
         hair: 32,
         address: {
-            title: 'Minsk'
+            city: 'Minsk',
+            house: 12
         },
         laptop: {
-            title: 'ASUS'
+            title: 'ASUS',
         }
     }
 
@@ -54,4 +65,28 @@ test('upgrade laptop to macbook', () => {
     expect(user.laptop).not.toBe(upgradedUser.laptop)
     expect(user.address).toBe(upgradedUser.address)
     expect(upgradedUser.laptop.title).toBe('Macbook')
+    expect(user.laptop.title).toBe('ASUS')
+})
+
+test('move user to another house', () => {
+    let user: UserWithLaptopType & UserWithBooksType = {
+        name: 'Johnny',
+        hair: 32,
+        address: {
+            city: 'Minsk',
+            house: 12
+        },
+        laptop: {
+            title: 'ASUS',
+        },
+        books: ['css', 'html', 'js', 'react']
+    }
+
+    const userCopy = moveUserToAnotherHouse(user, 99)
+
+    expect(user).not.toBe(userCopy)
+    expect(user.books).toBe(userCopy.books)
+    expect(user.laptop).toBe(userCopy.laptop)
+    expect(user.address).not.toBe(userCopy.address)
+    expect(userCopy.address.house).toBe(99)
 })

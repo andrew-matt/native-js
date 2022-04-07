@@ -1,7 +1,7 @@
 export type UserType = {
     name: string
     hair: number
-    address: {title: string}
+    address: {city: string, house: number}
 }
 
 export type LaptopType = {
@@ -10,6 +10,10 @@ export type LaptopType = {
 
 export type UserWithLaptopType = UserType & {
     laptop: LaptopType
+}
+
+export type UserWithBooksType = UserType & {
+    books: string[]
 }
 
 export function getHaircut(u: UserType, power: number) {
@@ -23,7 +27,7 @@ export function moveUser(u: UserWithLaptopType, newAddress: string) {
     return {
         ...u,
         address: {
-            title: newAddress
+            city: newAddress
         }
     }
 }
@@ -32,7 +36,18 @@ export function upgradeUserLaptop(u: UserWithLaptopType, newLaptop: string) {
     return {
         ...u,
         laptop: {
+            ...u.laptop,
             title: newLaptop
+        }
+    }
+}
+
+export function moveUserToAnotherHouse(u: UserWithLaptopType & UserWithBooksType, newHouse: number) {
+    return {
+        ...u,
+        address: {
+            ...u.address,
+            house: newHouse
         }
     }
 }
