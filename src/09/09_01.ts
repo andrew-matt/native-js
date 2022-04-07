@@ -1,6 +1,6 @@
 import React from "react";
 
-var user = {
+const user = {
     name: 'Andrew',
     age: 28
 }
