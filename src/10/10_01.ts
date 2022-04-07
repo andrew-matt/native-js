@@ -51,3 +51,10 @@ export function moveUserToAnotherHouse(u: UserWithLaptopType & UserWithBooksType
         }
     }
 }
+
+export function addNewBooksToUser(u: UserWithLaptopType & UserWithBooksType, oldBook: string, newBook: string) {
+    return {
+        ...u,
+        books: u.books.map(b => b === oldBook ? newBook : b)
+    }
+}
